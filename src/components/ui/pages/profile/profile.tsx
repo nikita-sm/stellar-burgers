@@ -55,12 +55,15 @@ export const ProfileUI: FC<ProfileUIProps> = ({
             type={'password'}
             placeholder={'Пароль'}
             onChange={handleInputChange}
-            value={formValue.password}
+            value={formValue.password || ''}
             name={'password'}
             error={false}
             errorText={''}
             size={'default'}
             icon={'EditIcon'}
+            autoComplete={'new-password'}
+            data-lpignore={'true'}
+            data-form-type={'other'}
           />
         </div>
         {isFormChanged && (

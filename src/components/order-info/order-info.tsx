@@ -1,21 +1,32 @@
-import { FC, useMemo } from 'react';
+import React, { FC, useMemo, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useSelector } from '../../services/store';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
-import { TIngredient } from '@utils-types';
+import { getOrderByNumberApi } from '../../utils/burger-api';
+import { TOrder, TIngredient } from '@utils-types';
 
 export const OrderInfo: FC = () => {
-  /** TODO: взять переменные orderData и ingredients из стора */
-  const orderData = {
-    createdAt: '',
-    ingredients: [],
-    _id: '',
-    status: '',
-    name: '',
-    updatedAt: 'string',
-    number: 0
-  };
+  const { number } = useParams<{ number: string }>();
+  const [orderData, setOrderData] = React.useState<TOrder | null>(null);
 
-  const ingredients: TIngredient[] = [];
+  // Получаем ингредиенты из стора
+  const ingredients = useSelector((state) => state.ingredients.ingredients);
+
+  // Получаем заказ по номеру
+  useEffect(() => {
+    if (number) {
+      getOrderByNumberApi(parseInt(number, 10))
+        .then((response) => {
+          if (response.orders && response.orders.length > 0) {
+            setOrderData(response.orders[0]);
+          }
+        })
+        .catch((error) => {
+          console.error('Ошибка получения заказа:', error);
+        });
+    }
+  }, [number]);
 
   /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {
@@ -28,7 +39,7 @@ export const OrderInfo: FC = () => {
     };
 
     const ingredientsInfo = orderData.ingredients.reduce(
-      (acc: TIngredientsWithCount, item) => {
+      (acc: TIngredientsWithCount, item: string) => {
         if (!acc[item]) {
           const ingredient = ingredients.find((ing) => ing._id === item);
           if (ingredient) {

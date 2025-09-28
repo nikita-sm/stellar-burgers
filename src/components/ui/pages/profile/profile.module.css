@@ -5,3 +5,20 @@
 .form {
   max-width: 480px;
 }
+
+.form input[name="password"] {
+  -webkit-text-security: none !important;
+  text-security: none !important;
+}
+
+.form input[name="password"]::-webkit-textfield-decoration-container {
+  display: none !important;
+}
+
+.form input[name="password"]::-webkit-credentials-auto-fill-button {
+  display: none !important;
+}
+
+.form input[name="password"]::-webkit-autofill-strong-password-viewable {
+  display: none !important;
+}

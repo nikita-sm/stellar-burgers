@@ -137,12 +137,12 @@ export type TRegisterData = {
   password: string;
 };
 
-type TAuthResponse = TServerResponse<{
+export type TAuthResponse = TServerResponse<{
   refreshToken: string;
   accessToken: string;
   user: TUser;
 }>;
-
+/*Регистрация в запросе передаем объект data с полями {email, name, password}*/
 export const registerUserApi = (data: TRegisterData) =>
   fetch(`${URL}/auth/register`, {
     method: 'POST',
@@ -161,7 +161,7 @@ export type TLoginData = {
   email: string;
   password: string;
 };
-
+/*Запрос на вход. В запросе передаем объект data с полями {email, password}*/
 export const loginUserApi = (data: TLoginData) =>
   fetch(`${URL}/auth/login`, {
     method: 'POST',
