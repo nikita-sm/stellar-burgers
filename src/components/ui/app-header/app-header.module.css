@@ -16,8 +16,17 @@
 
 .link {
   display: flex;
+  align-items: center;
   text-decoration: none;
   color: var(--text-inactive-color);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.link:hover {
+  color: var(--text-primary-color);
 }
 
 .link_active {

@@ -25,6 +25,7 @@ export const RegisterUI: FC<RegisterUIProps> = ({
         className={`pb-15 ${styles.form}`}
         name='register'
         onSubmit={handleSubmit}
+        autoComplete='off'
       >
         <>
           <div className='pb-6'>
@@ -37,6 +38,8 @@ export const RegisterUI: FC<RegisterUIProps> = ({
               error={false}
               errorText=''
               size='default'
+              autoComplete='off'
+              data-lpignore='true'
             />
           </div>
           <div className='pb-6'>
@@ -49,6 +52,8 @@ export const RegisterUI: FC<RegisterUIProps> = ({
               error={false}
               errorText=''
               size={'default'}
+              autoComplete='new-email'
+              data-lpignore='true'
             />
           </div>
           <div className='pb-6'>
@@ -56,6 +61,8 @@ export const RegisterUI: FC<RegisterUIProps> = ({
               onChange={(e) => setPassword(e.target.value)}
               value={password}
               name='password'
+              autoComplete='new-password'
+              data-lpignore='true'
             />
           </div>
           <div className={`pb-6 ${styles.button}`}>
