@@ -23,7 +23,10 @@ export const BurgerIngredientUI: FC<TBurgerIngredientUIProps> = memo(
         >
           {count && <Counter count={count} />}
           <img className={styles.img} src={image} alt='картинка ингредиента.' />
-          <div className={`${styles.cost} mt-2 mb-2`}>
+          <div
+            className={`${styles.cost} mt-2 mb-2`}
+            data-cy='ingredient-counter'
+          >
             <p className='text text_type_digits-default mr-2'>{price}</p>
             <CurrencyIcon type='primary' />
           </div>
